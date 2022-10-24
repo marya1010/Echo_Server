@@ -3,17 +3,20 @@ import socket
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind(('127.0.0.1', 55555))
 
-server.listen(1)
+server.listen()
 #conn, addr = sock.accept()
 # .accept принимает всех кто подключился к серверу
 # видит айпиб тип соединения и тд
+user, address = server.accept()
 while True:
-    user, address = server.accept()
-    print('Клиент присоединился')
-    user.send('Вы подключены'.encode('utf-8'))
 
+    #print('Клиент присоединился')
+    #user.send('Вы подключены'.encode('utf-8'))
+    user.send(input().encode('utf-8'))
+    data = user.recv(1024)
+    print(data.decode('utf-8'))
 
-conn.close()
+#conn.close()
 
 
 '''HOST = "127.0.0.1"  # Standard loopback interface address (localhost)
